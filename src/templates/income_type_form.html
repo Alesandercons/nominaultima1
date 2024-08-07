@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Crear/Editar Tipo de Ingreso{% endblock %}
+{% block body %}
+<h2>{{ mode }} Tipo de Ingreso</h2>
+<form method="post" action="{{ url_for('save_income_type') }}">
+    <input type="hidden" name="id" value="{{ ingreso.id if ingreso else '' }}">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required value="{{ ingreso.nombre if ingreso else '' }}"><br>
+    <label for="depende_salario">Depende de Salario:</label>
+    <input type="text" id="depende_salario" name="depende_salario" required value="{{ ingreso.depende_salario if ingreso else '' }}"><br>
+    <label for="estado">Estado:</label>
+    <select id="estado" name="estado" required>
+        <option value="Activo" {% if ingreso.estado == 'Activo' %}selected{% endif %}>Activo</option>
+        <option value="Inactivo" {% if ingreso.estado == 'Inactivo' %}selected{% endif %}>Inactivo</option>
+    </select><br>
+    <button type="submit" class="btn btn-primary">{{ mode }}</button>
+</form>
+{% endblock %}

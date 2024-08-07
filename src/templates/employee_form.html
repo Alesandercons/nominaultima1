@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Crear/Editar Empleado{% endblock %}
+{% block body %}
+<h2>{{ mode }} Empleado</h2>
+<form method="post" action="{{ url_for('save_employee') }}">
+    <input type="hidden" name="id" value="{{ empleado.id if empleado else '' }}">
+    <label for="cedula">Cédula:</label>
+    <input type="text" id="cedula" name="cedula" required value="{{ empleado.cedula if empleado else '' }}"><br>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required value="{{ empleado.nombre if empleado else '' }}"><br>
+    <label for="departamento">Departamento:</label>
+    <input type="text" id="departamento" name="departamento" value="{{ empleado.departamento if empleado else '' }}"><br>
+    <label for="puesto">Puesto:</label>
+    <input type="text" id="puesto" name="puesto" value="{{ empleado.puesto if empleado else '' }}"><br>
+    <label for="salario_mensual">Salario Mensual:</label>
+    <input type="number" id="salario_mensual" name="salario_mensual" required value="{{ empleado.salario_mensual if empleado else '' }}"><br>
+    <label for="nomina_id">ID de Nómina:</label>
+    <input type="number" id="nomina_id" name="nomina_id" required value="{{ empleado.nomina_id if empleado else '' }}"><br>
+    <button type="submit" class="btn btn-primary">{{ mode }}</button>
+</form>
+{% endblock %}

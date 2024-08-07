@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Tipos de Deducciones{% endblock %}
+{% block body %}
+<h2>Tipos de Deducciones</h2>
+<a href="{{ url_for('create_deduction_type_form') }}" class="btn btn-success">Agregar</a>
+<table class="table table-hover table-bordered my-3" aria-describedby="titulo">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Depende de Salario</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for deduccion in deducciones %}
+        <tr>
+            <td>{{ deduccion.nombre }}</td>
+            <td>{{ deduccion.depende_salario }}</td>
+            <td>{{ deduccion.estado }}</td>
+            <td>
+                <a href="{{ url_for('edit_deduction_type_form', id=deduccion.id) }}" class="btn btn-warning btn-sm me-2">Editar</a>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#eliminaModal" data-bs-id="{{ deduccion.id }}">Eliminar</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Modal para eliminar -->
+<div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="eliminaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eliminaModalLabel">Aviso</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea eliminar este registro?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="form-elimina" action="{{ url_for('delete_deduction_type') }}" method="post">
+                    <input type="hidden" name="id" value="">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

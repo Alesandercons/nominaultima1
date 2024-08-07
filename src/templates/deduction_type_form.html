@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Crear/Editar Tipo de Deducción{% endblock %}
+{% block body %}
+<h2>{{ mode }} Tipo de Deducción</h2>
+<form method="post" action="{{ url_for('save_deduction_type') }}">
+    <input type="hidden" name="id" value="{{ deduccion.id if deduccion else '' }}">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required value="{{ deduccion.nombre if deduccion else '' }}"><br>
+    <label for="depende_salario">Depende de Salario:</label>
+    <input type="text" id="depende_salario" name="depende_salario" required value="{{ deduccion.depende_salario if deduccion else '' }}"><br>
+    <label for="estado">Estado:</label>
+    <select id="estado" name="estado" required>
+        <option value="Activo" {% if deduccion.estado == 'Activo' %}selected{% endif %}>Activo</option>
+        <option value="Inactivo" {% if deduccion.estado == 'Inactivo' %}selected{% endif %}>Inactivo</option>
+    </select><br>
+    <button type="submit" class="btn btn-primary">{{ mode }}</button>
+</form>
+{% endblock %}
